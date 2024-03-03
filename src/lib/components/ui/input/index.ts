@@ -1,4 +1,4 @@
-import Root from './CurrencyInput.svelte';
+import Root from "./input.svelte";
 
 type FormInputEvent<T extends Event = Event> = T & {
 	currentTarget: EventTarget & HTMLInputElement;
@@ -19,9 +19,9 @@ export type InputEvents = {
 	paste: FormInputEvent<ClipboardEvent>;
 	input: FormInputEvent<InputEvent>;
 };
+
 export {
 	Root,
 	//
-	Root as CurrencyInput,
+	Root as Input,
 };
-
