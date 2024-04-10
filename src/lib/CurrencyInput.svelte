@@ -1,25 +1,38 @@
 <script lang="ts">
 import { onMount } from 'svelte';
-import { cn } from '$lib/utils';
 import type { HTMLInputAttributes } from 'svelte/elements';
-import type { InputEvents } from '.';
+import { type InputEvents, cn } from './index.js';
 
 type CustomProps = {
 	value?: any;
 	class?: string;
+	onValueChange?: Callback;
 	locale?: string;
 	currency?: string;
 	name?: string;
 	required?: boolean;
 	disabled?: boolean;
-	onValueChange?: Callback;
+	placeholder?: string | number | null;
+	autocomplete?: string | null | undefined;
+	isNegativeAllowed?: boolean;
+	isZeroNullish?: boolean;
+	fractionDigits?: number;
+	inputClasses?: InputClasses | null;
 };
+interface InputClasses {
+	wrapper?: string | undefined;
+	unformatted?: string | undefined;
+	formatted?: string | undefined;
+	formattedPositive?: string | undefined;
+	formattedNegative?: string | undefined;
+	formattedZero?: string | undefined;
+}
 
 type $$Props = CustomProps & Omit<HTMLInputAttributes, keyof CustomProps>;
-
 type $$Events = InputEvents;
-
 let className: $$Props['class'] = undefined;
+export { className as class };
+export let readonly: $$Props['readonly'] = undefined;
 
 const DEFAULT_LOCALE = 'en-US';
 const DEFAULT_CURRENCY = 'USD';
@@ -34,19 +47,11 @@ const DEFAULT_CLASS_FORMATTED_POSITIVE = 'text-green-600';
 const DEFAULT_CLASS_FORMATTED_NEGATIVE = 'text-red-600';
 const DEFAULT_CLASS_FORMATTED_ZERO = 'currencyInput__formatted--zero';
 
-interface InputClasses {
-	unformatted?: string;
-	formatted?: string;
-	formattedPositive?: string;
-	formattedNegative?: string;
-	formattedZero?: string;
-}
-
 type Callback = (value: number) => any;
 
 // export let value: number = DEFAULT_VALUE;
 export let value: $$Props['value'] = DEFAULT_VALUE;
-export { className as class };
+
 export let locale: string = DEFAULT_LOCALE;
 export let currency: string = DEFAULT_CURRENCY;
 export let name: string = DEFAULT_NAME;
@@ -243,6 +248,7 @@ $: value, setFormattedValue();
 			: '',
 			className
 		)}
+	readonly={readonly}
 	type="text"
 	inputmode={fractionDigits > 0 ? 'decimal' : 'numeric'}
 	name={`formatted-${name}`}
@@ -266,5 +272,6 @@ $: value, setFormattedValue();
 	on:mouseleave
 	on:paste
 	on:input
+	on:wheel
 	{...$$restProps}
 />

@@ -1,12 +1,15 @@
-# svelte-currency-input
+Unoffical port for shadcn-svelte
+
+
+many thanks to:
+- [`svelte-currency-input`](https://github.com/canutin/svelte-currency-input)
+- [`shadcn-svelte`](https://github.com/huntabyte/shadcn-svelte)
+--------------------------------------------------------------------------------------------------
+# svelte-currency-shadcn
 
 A form input that converts numbers to localized currency formats as you type
 
 [<img width="962" alt="image" src="https://user-images.githubusercontent.com/1434675/190873948-c0385747-6fa9-4077-8bd5-717e4d1124a0.png">](https://svelte.dev/repl/d8f7d22e5b384555b430f62b157ac503?version=3.50.1)
-
-<p align="center">
-  👩‍💻 Play with it on <a href="https://svelte.dev/repl/d8f7d22e5b384555b430f62b157ac503?version=3.50.1" target="_blank">REPL</a>  &nbsp;—&nbsp; 💵 See it in a <a href="https://github.com/Canutin/desktop/blob/master/sveltekit/src/lib/components/FormCurrency.svelte" target="_blank">real project</a>!
-</p>
 
 ---
 
@@ -20,12 +23,12 @@ A form input that converts numbers to localized currency formats as you type
 ## Usage
 
 ```bash
-npm install @canutin/svelte-currency-input --save
+npm install npm i svelte-currency-shadcn --save
 ```
 
 ```html
 <script lang="ts">
-  import CurrencyInput from '@canutin/svelte-currency-input';
+  import { CurrencyInput } from 'npm i svelte-currency-shadcn';
 </script>
 
 <CurrencyInput name="total" value={-420.69} locale="nl-NL" currency="EUR" />
@@ -106,7 +109,7 @@ Usage (with [Tailwind CSS](https://tailwindcss.com/) as an example):
 } />
 ```
 
-Alternatively you can **write your own CSS** by overriding the [default styles](https://github.com/canutin/svelte-currency-input/blob/main/src/lib/CurrencyInput.svelte) which use [BEM naming conventions](https://getbem.com/naming/). To do so apply your styles as shown below:
+Alternatively you can **write your own CSS** by overriding the [default styles](https://github.com/drloloto/svelte-currency-shadcn/blob/main/src/lib/CurrencyInput.svelte) which use [BEM naming conventions](https://getbem.com/naming/). To do so apply your styles as shown below:
 
 ```svelte
 <div class="my-currency-input">
@@ -138,9 +141,9 @@ Alternatively you can **write your own CSS** by overriding the [default styles](
 
 Here's ways in which you can contribute:
 
-- Found a bug? Open a [new issue](https://github.com/canutin/svelte-currency-input/issues/new)
-- Comment or upvote [existing issues](https://github.com/canutin/svelte-currency-input/issues)
-- Submit a [pull request](https://github.com/canutin/svelte-currency-input/pulls)
+- Found a bug? Open a [new issue](https://github.com/drloloto/svelte-currency-shadcn/issues/new)
+- Comment or upvote [existing issues](https://github.com/drloloto/svelte-currency-shadcn/issues)
+- Submit a [pull request](https://github.com/drloloto/svelte-currency-shadcn/pulls)
 
 ## Developing
 
@@ -152,11 +155,11 @@ npm run dev
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
 ```
-
+# Currently tests not working
 #### Integration tests
 
 The component is tested using [Playwright](https://playwright.dev/).
-You can find the tests in [`tests/svelte-currency-input.test.ts`](https://github.com/Canutin/svelte-currency-input/blob/main/tests/svelte-currency-input.test.ts)
+You can find the tests in [`tests/svelte-currency-input.test.ts`](https://github.com/drloloto/svelte-currency-shadcn/blob/main/tests/svelte-currency-input.test.ts)
 
 To run all tests on **Chromium**, **Firefox** and **Webkit**:
 ```bash

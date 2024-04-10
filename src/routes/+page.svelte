@@ -1,49 +1,45 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import CurrencyInput from '$lib/CurrencyInput.svelte';
+import '../app.pcss';
+import { browser } from '$app/environment';
+import { CurrencyInput } from '../../dist/';
 
-	let output: string;
-	const handleSubmit = (event: Event) => {
-		event.preventDefault();
-		// Get the form data
-		const data = new FormData(event.target as HTMLFormElement);
-		// Pretty-print the data as JSON
-		output = JSON.stringify(Object.fromEntries(data.entries()), null, 2);
-	};
+let output: string;
+const handleSubmit = (event: Event) => {
+	event.preventDefault();
+	// Get the form data
+	const data = new FormData(event.target as HTMLFormElement);
+	// Pretty-print the data as JSON
+	output = JSON.stringify(Object.fromEntries(data.entries()), null, 2);
+};
 
-	let unchangedValue = 999; // Used for onValueChange()
-	let chainedValue = 9999.99; // Used for chained inputs
+let unchangedValue = 999; // Used for onValueChange()
+let chainedValue = 9999.99; // Used for chained inputs
 
-	const setChainedValue = () => {
-		chainedValue = 420.69;
-	};
+const setChainedValue = () => {
+	chainedValue = 420.69;
+};
 </script>
 
 <form class="demoForm" on:submit={handleSubmit}>
 	<nav class="demoForm__nav">
-		<h1 class="demoForm__h1">svelte-currency-input</h1>
-		<a class="demoForm__a" href="https://github.com/canutin/svelte-currency-input" target="_blank"
+		<h1 class="demoForm__h1">svelte-currency-shadcn</h1>
+		<a class="demoForm__a" href="https://github.com/drloloto/svelte-currency-shadcn" target="_blank"
 			>GitHub repository</a
 		>
 		<a
 			class="demoForm__a"
-			href="https://github.com/canutin/svelte-currency-input/issues"
+			href="https://github.com/drloloto/svelte-currency-shadcn/issues"
 			target="_blank">Known issues</a
 		>
 		<a
 			class="demoForm__a"
-			href="https://github.com/canutin/svelte-currency-input#contributing"
+			href="https://github.com/drloloto/svelte-currency-shadcn#contributing"
 			target="_blank">Contribute</a
 		>
 		<a
 			class="demoForm__a"
 			href="https://www.npmjs.com/package/@canutin/svelte-currency-input"
 			target="_blank">NPM</a
-		>
-		<a
-			class="demoForm__a"
-			href="https://svelte.dev/repl/d8f7d22e5b384555b430f62b157ac503?version=3.59.2"
-			target="_blank">REPL</a
 		>
 	</nav>
 
@@ -148,155 +144,156 @@
 	<nav class="demoForm__output">
 		<button id="submit-form" type="submit" class="demoForm__button">Submit form</button>
 
-		<pre class="demoForm__pre {!output && 'demoForm__pre--placeholder'}">{output
+		<pre
+			class="demoForm__pre {!output && 'demoForm__pre--placeholder'}">{output
 				? output
 				: 'Submit form to see a JSON output of the values'}</pre>
 	</nav>
 </form>
 
 <style>
-	/* Overriding the styles of the <CurrencyInput /> component */
-	form.demoForm :global(input.currencyInput__formatted) {
-		width: 100%;
-		font-family: monospace;
-		font-size: 13px;
+/* Overriding the styles of the <CurrencyInput /> component */
+form.demoForm :global(input.currencyInput__formatted) {
+	width: 100%;
+	font-family: monospace;
+	font-size: 13px;
+}
+
+/* Styles for demo presentation (you can ignore these) */
+:global(body) {
+	--gap: 64px;
+
+	font-family: sans-serif;
+	box-sizing: border-box;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #eaeaea;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	place-items: center;
+	padding: var(--gap);
+
+	@media (max-width: 768px) {
+		--gap: 48px;
 	}
 
-	/* Styles for demo presentation (you can ignore these) */
-	:global(body) {
-		--gap: 64px;
+	@media (max-width: 512px) {
+		--gap: 32px;
+	}
+}
 
-		font-family: sans-serif;
-		box-sizing: border-box;
-		min-height: 100vh;
-		margin: 0;
-		background-color: #eaeaea;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		place-items: center;
-		padding: var(--gap);
+form.demoForm {
+	display: flex;
+	flex-direction: column;
+	row-gap: var(--gap);
+}
 
-		@media (max-width: 768px) {
-			--gap: 48px;
-		}
+div.demoForm__container {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
 
-		@media (max-width: 512px) {
-			--gap: 32px;
-		}
+fieldset.demoForm__fieldset {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	align-items: center;
+	justify-content: center;
+	gap: calc(var(--gap) / 2);
+	height: max-content;
+	border: 1px solid #ccc;
+	padding: 16px;
+
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
 	}
 
-	form.demoForm {
-		display: flex;
+	@media (max-width: 512px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+legend.demoForm__legend {
+	font-size: 13px;
+	color: #666;
+}
+
+h1.demoForm__h1 {
+	color: #333;
+	font-size: 20px;
+	letter-spacing: -0.025em;
+	line-height: 1em;
+	margin-block: unset;
+	margin-right: auto;
+	padding-right: 16px;
+}
+
+nav.demoForm__nav {
+	font-size: 13px;
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+
+	@media (max-width: 512px) {
 		flex-direction: column;
-		row-gap: var(--gap);
+		gap: 24px;
 	}
+}
 
-	div.demoForm__container {
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
+a.demoForm__a {
+	color: #333;
+	text-decoration: none;
+	border-bottom-width: 1px;
+	border-bottom-color: #ccc;
+	border-bottom-style: solid;
+}
+
+a.demoForm__a:visited {
+	color: #666;
+}
+
+a.demoForm__a:hover {
+	color: #000;
+	border-bottom-color: transparent;
+}
+
+nav.demoForm__output {
+	display: grid;
+	grid-template-columns: max-content auto;
+	gap: calc(var(--gap) / 2);
+
+	@media (max-width: 512px) {
+		grid-template-columns: unset;
 	}
+}
 
-	fieldset.demoForm__fieldset {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		align-items: center;
-		justify-content: center;
-		gap: calc(var(--gap) / 2);
-		height: max-content;
-		border: 1px solid #ccc;
-		padding: 16px;
+pre.demoForm__pre {
+	background-color: #f4f4f4;
+	padding: 10px;
+	margin: 0;
+	color: #666;
+	box-sizing: border-box;
+	max-width: 100%;
+	overflow-y: auto;
+}
 
-		@media (max-width: 768px) {
-			grid-template-columns: repeat(2, 1fr);
-		}
+pre.demoForm__pre--placeholder {
+	font-family: sans-serif;
+	font-size: 13px;
+}
 
-		@media (max-width: 512px) {
-			grid-template-columns: 1fr;
-		}
-	}
+button.demoForm__button {
+	border: none;
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	font-size: 13px;
+	cursor: pointer;
+	height: max-content;
+}
 
-	legend.demoForm__legend {
-		font-size: 13px;
-		color: #666;
-	}
-
-	h1.demoForm__h1 {
-		color: #333;
-		font-size: 20px;
-		letter-spacing: -0.025em;
-		line-height: 1em;
-		margin-block: unset;
-		margin-right: auto;
-		padding-right: 16px;
-	}
-
-	nav.demoForm__nav {
-		font-size: 13px;
-		display: flex;
-		gap: 16px;
-		justify-content: center;
-
-		@media (max-width: 512px) {
-			flex-direction: column;
-			gap: 24px;
-		}
-	}
-
-	a.demoForm__a {
-		color: #333;
-		text-decoration: none;
-		border-bottom-width: 1px;
-		border-bottom-color: #ccc;
-		border-bottom-style: solid;
-	}
-
-	a.demoForm__a:visited {
-		color: #666;
-	}
-
-	a.demoForm__a:hover {
-		color: #000;
-		border-bottom-color: transparent;
-	}
-
-	nav.demoForm__output {
-		display: grid;
-		grid-template-columns: max-content auto;
-		gap: calc(var(--gap) / 2);
-
-		@media (max-width: 512px) {
-			grid-template-columns: unset;
-		}
-	}
-
-	pre.demoForm__pre {
-		background-color: #f4f4f4;
-		padding: 10px;
-		margin: 0;
-		color: #666;
-		box-sizing: border-box;
-		max-width: 100%;
-		overflow-y: auto;
-	}
-
-	pre.demoForm__pre--placeholder {
-		font-family: sans-serif;
-		font-size: 13px;
-	}
-
-	button.demoForm__button {
-		border: none;
-		background-color: #333;
-		color: #fff;
-		padding: 10px;
-		font-size: 13px;
-		cursor: pointer;
-		height: max-content;
-	}
-
-	button.demoForm__button:hover {
-		background-color: #000;
-	}
+button.demoForm__button:hover {
+	background-color: #000;
+}
 </style>
