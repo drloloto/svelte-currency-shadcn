@@ -28,7 +28,7 @@ npm install npm i svelte-currency-shadcn --save
 
 ```html
 <script lang="ts">
-  import { CurrencyInput } from 'npm i svelte-currency-shadcn';
+  import { CurrencyInput } from 'svelte-currency-shadcn';
 </script>
 
 <CurrencyInput name="total" value={-420.69} locale="nl-NL" currency="EUR" />
